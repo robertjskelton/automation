@@ -267,7 +267,7 @@
     "ALBTargetGroup" : {
       "Type" : "AWS::ElasticLoadBalancingV2::TargetGroup",
       "Properties" : {
-        "HealthCheckPath" : "/wordpress/wp-admin/install.php",
+        "HealthCheckPath" : "/wp-admin/install.php",
         "HealthCheckIntervalSeconds" : 10,
         "HealthCheckTimeoutSeconds" : 5,
         "HealthyThresholdCount" : 2,
@@ -379,7 +379,7 @@
               "/tmp/create-wp-config" : {
                 "content" : { "Fn::Join" : [ "", [
                   "#!/bin/bash\n",
-                  "cp /var/www/html/wordpress/wp-config-sample.php /var/www/html/wordpress/wp-config.php\n",
+                  "cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php\n",
                   "sed -i \"s/'database_name_here'/'",{ "Ref" : "DBName" }, "'/g\" wp-config.php\n",
                   "sed -i \"s/'username_here'/'",{ "Ref" : "DBUser" }, "'/g\" wp-config.php\n",
                   "sed -i \"s/'password_here'/'",{ "Ref" : "DBPassword" }, "'/g\" wp-config.php\n",
@@ -393,7 +393,7 @@
             "commands" : {
               "01_configure_wordpress" : {
                 "command" : "/tmp/create-wp-config",
-                "cwd" : "/var/www/html/wordpress"
+                "cwd" : "/var/www/html"
               }
             },
             "services" : {
@@ -459,7 +459,7 @@
 
   "Outputs" : {
     "WebsiteURL" : {
-      "Value" : { "Fn::Join" : ["", ["http://", { "Fn::GetAtt" : [ "ApplicationLoadBalancer", "DNSName" ]}, "/wordpress" ]]},
+      "Value" : { "Fn::Join" : ["", ["http://", { "Fn::GetAtt" : [ "ApplicationLoadBalancer", "DNSName" ]}, "" ]]},
       "Description" : "WordPress Website"
     }
   }
