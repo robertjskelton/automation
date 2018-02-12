@@ -373,12 +373,13 @@
               }
             },
             "sources" : {
-              "/var/www/html" : "http://wordpress.org/latest.tar.gz"
+              "/tmp" : "http://wordpress.org/latest.tar.gz"
             },
             "files" : {
               "/tmp/create-wp-config" : {
                 "content" : { "Fn::Join" : [ "", [
                   "#!/bin/bash\n",
+                  "cp -R /tmp/wordpress/*  /var/www/html\n",
                   "cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php\n",
                   "sed -i \"s/'database_name_here'/'",{ "Ref" : "DBName" }, "'/g\" wp-config.php\n",
                   "sed -i \"s/'username_here'/'",{ "Ref" : "DBUser" }, "'/g\" wp-config.php\n",
