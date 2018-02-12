@@ -312,10 +312,10 @@
       },
       "UpdatePolicy": {
         "AutoScalingRollingUpdate": {
-          "MinInstancesInService": "1",
+          "MinInstancesInService": "0",
           "MaxBatchSize": "1",
           "PauseTime" : "PT15M",
-          "WaitOnResourceSignals": "true"
+          "WaitOnResourceSignals": "false"
         }
       }
     },
